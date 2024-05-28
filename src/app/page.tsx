@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import ReactPlayer from "react-player/lazy";
 
 const handleImageUpload = async (event: any, setFileUrl: any) => {
@@ -12,6 +12,14 @@ const handleImageUpload = async (event: any, setFileUrl: any) => {
 
 export default function Home() {
     const [fileUrl, setFileUrl] = useState("");
+    const playerRef = useRef(null);
+
+    // useEffect(() => {
+    //     // Seek to 10 seconds when fileUrl changes
+    //     if (playerRef.current) {
+    //         playerRef.current.seekTo(10, "seconds");
+    //     }
+    // }, [fileUrl]);
 
     return (
         <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -29,11 +37,17 @@ export default function Home() {
                     />
                 </div>
                 <ReactPlayer
+                    ref={playerRef}
                     url={
                         fileUrl ||
                         "https://giistyxelor.s3.amazonaws.com/giists/video/video0cP3w019TiZYYcUy22WY.mp4"
                     }
                     controls={true}
+                    onPlay={() => {
+                        if (playerRef.current) {
+                            playerRef.current.seekTo(10, "seconds");
+                        }
+                    }}
                 />
             </div>
         </main>
