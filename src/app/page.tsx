@@ -1,19 +1,10 @@
 "use client";
 import ReactPlayerComponent from "@/components/ReactPlayer";
 import UploadFile from "@/components/UploadFile";
-import React, { useState, useRef, useEffect } from "react";
-import ReactPlayer from "react-player/lazy";
-
-const handleImageUpload = async (event: any, setFileUrl: any) => {
-    const file = event.target.files[0];
-    if (file) {
-        const url = URL.createObjectURL(file);
-        setFileUrl(url);
-    }
-};
+import React, { useState } from "react";
 
 export default function Home() {
-    const [audioUrl, setAudioUrl] = useState("");
+    const [audioFile, setAudioFile] = useState("");
 
     return (
         <main className=" min-h-screen flex-col items-center ">
@@ -21,9 +12,9 @@ export default function Home() {
                 English Speaking Activities
             </p>
             <div className="sm:flex  p-24 items-center justify-between font-mono text-sm">
-                <UploadFile setAudioUrl={setAudioUrl} />
-              
-                <ReactPlayerComponent fileUrl={audioUrl} />
+                <UploadFile setAudioFile={setAudioFile} />
+
+                <ReactPlayerComponent audioFile={audioFile} />
             </div>
         </main>
     );
