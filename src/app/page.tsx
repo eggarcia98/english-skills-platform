@@ -1,4 +1,5 @@
 "use client";
+import ExerciseBoard from "@/components/ExerciseBoard";
 import ReactPlayerComponent from "@/components/ReactPlayer";
 import UploadFile from "@/components/UploadFile";
 import React, { useState } from "react";
@@ -13,8 +14,8 @@ export default function Home() {
             </p>
             <div className="sm:flex  p-24 items-center justify-between font-mono text-sm">
                 <UploadFile setAudioFile={setAudioFile} />
-
                 <ReactPlayerComponent audioFile={audioFile} />
+                <ExerciseBoard audioFile={audioFile} />
             </div>
         </main>
     );
