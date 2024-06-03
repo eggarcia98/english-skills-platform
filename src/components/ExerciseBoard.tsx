@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import ExerciseCard from "./ExerciseCards";
 
 export default function ExerciseBoard({ audioFile }: any) {
     const [isProcessing, setIsProcessing] = useState(true);
@@ -45,8 +46,11 @@ export default function ExerciseBoard({ audioFile }: any) {
                     </div>
                 </div>
             ) : (
-                    <>{JSON.stringify(audioSummary)}</>
-            )}
+                    <>
+                        {/* <ExerciseCard/> */}
+                    </>       
+            )
+            }
         </>
     );
 }
