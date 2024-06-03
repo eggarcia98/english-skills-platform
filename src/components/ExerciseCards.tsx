@@ -188,17 +188,63 @@ export default function ExerciseCard() {
     const [cardsData, setCardsData] = useState(dataDemo);
 
     const [currentIndex, setCurrentIndex] = useState(0); // Initialize with the first card
+    const [indexCardsAround, setIndexCardsAround] = useState({
+        oneNext: 1,
+        twoNext: 2,
+        onePrevious: cardsData.length - 1,
+        twoPrevious: cardsData.length - 2,
+    }); // Initialize with the first card
 
+    const updateIndexAround = (currentIndex: number) => {
+        const onePrevious =
+            currentIndex === 0 ? cardsData.length - 1 : currentIndex - 1;
+
+        const twoPrevious =
+            currentIndex === 0
+                ? cardsData.length - 2
+                : currentIndex === 1
+                ? cardsData.length - 1
+                : currentIndex - 2;
+
+        const oneNext =
+            currentIndex === cardsData.length - 1 ? 0 : currentIndex + 1;
+
+        const twoNext =
+            currentIndex === cardsData.length - 1
+                ? 1
+                : currentIndex === cardsData.length - 2
+                ? 0
+                : currentIndex + 2;
+
+        const indexCardsAround = {
+            oneNext,
+            twoNext,
+            onePrevious,
+            twoPrevious,
+        };
+        setIndexCardsAround(indexCardsAround);
+
+        console.log({ ...indexCardsAround, currentIndex });
+    };
     const handleNext = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex < cardsData.length ? prevIndex + 1 : 0
-        ); // Wrap around to the first card
+        setCurrentIndex((prevIndex) => {
+            console.log({ prevIndex });
+            const currentIndex =
+                prevIndex === cardsData.length - 1 ? 0 : prevIndex + 1;
+
+            updateIndexAround(currentIndex);
+            return currentIndex;
+        }); // Wrap around to the first card
     };
 
     const handlePrevious = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex > 0 ? prevIndex - 1 : cardsData.length
-        ); // Wrap around to the last card
+        setCurrentIndex((prevIndex) => {
+            const currentIndex =
+                prevIndex === 0 ? cardsData.length - 1 : prevIndex - 1; ;
+            updateIndexAround(currentIndex);
+
+            return currentIndex;
+        }); // Wrap around to the last card
     };
 
     // const cards = [
@@ -231,38 +277,33 @@ export default function ExerciseCard() {
                                                 : ""
                                         }
                                         ${
-                                            index === currentIndex + 1 ||
-                                            currentIndex ===
-                                                cardsData.length - 1
+                                            index === indexCardsAround.oneNext
                                                 ? "translate-x-14 scale-[90%] z-40"
                                                 : ""
                                         }
                                         ${
-                                            currentIndex + 2 === index ||
-                                            currentIndex ===
-                                                cardsData.length - 1
+                                            index === indexCardsAround.twoNext
                                                 ? "translate-x-24 scale-[80%] z-30"
                                                 : ""
                                         }
                                         ${
-                                            currentIndex - 1 === index ||
-                                            currentIndex ===
-                                                cardsData.length + 1
-                                                ? "translate-x-14 scale-[90%] z-40"
+                                            index ===
+                                            indexCardsAround.onePrevious
+                                                ? "-translate-x-14 scale-[90%] z-40"
                                                 : ""
                                         }
-                                        ${
-                                            currentIndex - 2 === index ||
-                                            currentIndex ===
-                                                cardsData.length + 2
-                                                ? "translate-x-24 scale-[80%] z-30"
-                                                : ""
-                                        }
+                                         ${
+                                             index ===
+                                             indexCardsAround.twoPrevious
+                                                 ? "-translate-x-24 scale-[80%] z-30"
+                                                 : ""
+                                         }
+                                        
                                     `}
                                 >
                                     <article className="bg-white p-6 rounded-lg shadow-2xl">
                                         <header className="mb-5">
-                                            <h2 className="block antialiased tracking-normal font-sans text-4xl font-semibold leading-[1.3] text-blue-gray-900 mb-4">
+                                            <h2 className="block antialiased tracking-normal font-sans text-4xl font-semibold leading-[1.3] text-slate-900 mb-4">
                                                 Exercise ({index + 1}/
                                                 {cardsData.length})
                                             </h2>
