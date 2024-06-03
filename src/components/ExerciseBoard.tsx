@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
-import ExerciseCard from "./ExerciseCards";
+import ExerciseCards from "./ExerciseCards";
 
 export default function ExerciseBoard({ audioFile }: any) {
     const [isProcessing, setIsProcessing] = useState(true);
     const [audioSummary, setAudioSummary] = useState([]);
 
     useEffect(() => {
-        
         setIsProcessing(true);
+        console.log({ isProcessing });
         fetch("http://localhost:6030/summarize_audio", {
             headers: {
                 "Content-Type": "audio/*",
@@ -18,18 +18,21 @@ export default function ExerciseBoard({ audioFile }: any) {
             .then((res) => {
                 return res.json();
             })
-            .then((data) => {
-                setAudioSummary(data);
-                setIsProcessing(false);
-                console.log(data);
-            });
+            .then(({data, error}) => {
+                setAudioSummary(error ? [] : data);
+                setIsProcessing(error ? true : false);
+
+                console.log({ data });
+            })
+            .catch((error) => console.log({ error }));
     }, [audioFile]);
 
     if (!audioFile) return <></>;
 
     return (
         <>
-            {isProcessing ? (
+            {!isProcessing}
+            {!isProcessing ? (
                 <div className="flex min-h-screen items-center justify-center">
                     <div className="w-1/3">
                         <div className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
@@ -46,11 +49,8 @@ export default function ExerciseBoard({ audioFile }: any) {
                     </div>
                 </div>
             ) : (
-                    <>
-                        {/* <ExerciseCard/> */}
-                    </>       
-            )
-            }
+                <>{<ExerciseCards audioSummary={audioSummary} />}</>
+            )}
         </>
     );
 }
