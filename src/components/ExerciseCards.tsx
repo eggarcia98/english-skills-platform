@@ -185,7 +185,7 @@ const dataDemo = [
 ];
 
 export default function ExerciseCards({ audioSummary }: any) {
-    const [cardsData, setCardsData] = useState(dataDemo);
+    const [cardsData, setCardsData] = useState(audioSummary);
 
     const [currentIndex, setCurrentIndex] = useState(0); // Initialize with the first card
     const [indexCardsAround, setIndexCardsAround] = useState({

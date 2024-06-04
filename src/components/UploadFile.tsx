@@ -1,11 +1,10 @@
 import React, { useState, useRef, useEffect } from "react";
 
 interface UploadFileProps {
-    setAudioFile: React.Dispatch<React.SetStateAction<string>>;
+    setAudioFile: React.Dispatch<React.SetStateAction<null>>;
 }
 
 export default function UploadFile({ setAudioFile }: UploadFileProps) {
-
     const handleAudioUpload = (event: any) => {
         const audioFile = event.target.files[0];
         if (audioFile) {
@@ -64,6 +63,7 @@ export default function UploadFile({ setAudioFile }: UploadFileProps) {
                     </svg>
                 </label>
             </form>
+          
         </div>
     );
 }

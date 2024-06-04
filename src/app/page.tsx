@@ -2,12 +2,13 @@
 import ExerciseBoard from "@/components/ExerciseBoard";
 import ReactPlayerComponent from "@/components/ReactPlayer";
 import UploadFile from "@/components/UploadFile";
-import ExerciseCards from "@/components/ExerciseCards";
 
 import React, { useState } from "react";
+import AudioUrlInput from "@/components/AudioUrlInput";
 
 export default function Home() {
-    const [audioFile, setAudioFile] = useState("");
+    const [audioFile, setAudioFile] = useState(null);
+    const [audioUrl, setAudioUrl] = useState(null);
 
     return (
         <main className=" min-h-screen flex-col items-center ">
@@ -16,10 +17,10 @@ export default function Home() {
             </p>
             <div className="sm:flex  p-24 items-center justify-between font-mono text-sm">
                 <UploadFile setAudioFile={setAudioFile} />
-                <ReactPlayerComponent audioFile={audioFile} />
-                <ExerciseBoard audioFile={audioFile} />
+                <AudioUrlInput setAudioUrl={setAudioUrl} />
             </div>
-            <ExerciseCards></ExerciseCards>
+                <ReactPlayerComponent audioFile={audioFile} />
+                <ExerciseBoard audioFile={audioFile} audioUrl={audioUrl} />
         </main>
     );
 }

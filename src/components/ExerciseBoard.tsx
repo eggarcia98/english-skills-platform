@@ -1,38 +1,36 @@
 import { useEffect, useState } from "react";
 import ExerciseCards from "./ExerciseCards";
 
-export default function ExerciseBoard({ audioFile }: any) {
+export default function ExerciseBoard({ audioFile, audioUrl }: any) {
     const [isProcessing, setIsProcessing] = useState(true);
     const [audioSummary, setAudioSummary] = useState([]);
 
     useEffect(() => {
         setIsProcessing(true);
-        console.log({ isProcessing });
+        console.log(!!audioFile ? audioFile : { url: audioUrl });
         fetch("http://localhost:6030/summarize_audio", {
             headers: {
-                "Content-Type": "audio/*",
+                "Content-Type": !!audioFile ? "audio/*" : "application/json",
             },
             method: "POST",
-            body: audioFile,
+            body: !!audioFile ? audioFile : JSON.stringify({ url: audioUrl }),
         })
             .then((res) => {
                 return res.json();
             })
-            .then(({data, error}) => {
+            .then(({ data, error }) => {
                 setAudioSummary(error ? [] : data);
                 setIsProcessing(error ? true : false);
-
-                console.log({ data });
+                console.log({ data }, error ? true : false);
             })
             .catch((error) => console.log({ error }));
-    }, [audioFile]);
+    }, [audioFile, audioUrl]);
 
-    if (!audioFile) return <></>;
+    if (!(audioFile || audioUrl)) return <></>;
 
     return (
         <>
-            {!isProcessing}
-            {!isProcessing ? (
+            {isProcessing ? (
                 <div className="flex min-h-screen items-center justify-center">
                     <div className="w-1/3">
                         <div className="max-w-sm rounded overflow-hidden shadow-lg animate-pulse">
