@@ -19,7 +19,7 @@ export default function Home() {
                 <UploadFile setAudioFile={setAudioFile} />
                 <AudioUrlInput setAudioUrl={setAudioUrl} />
             </div>
-                <ReactPlayerComponent audioFile={audioFile} />
+                <ReactPlayerComponent audioFile={audioFile} audioUrl={audioUrl} />
                 <ExerciseBoard audioFile={audioFile} audioUrl={audioUrl} />
         </main>
     );
