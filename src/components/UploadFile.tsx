@@ -34,7 +34,7 @@ export default function UploadFile({ setAudioFile }: UploadFileProps) {
         <div>
             <form
                 action="#"
-                className="relative w-4/5 h-32 max-w-xs mb-10 bg-white bg-gray-100 rounded-lg shadow-inner"
+                className="h-24 max-w-xs bg-white bg-gray-100 rounded-lg shadow-inner m-2"
                 onDragOver={handleDrag}
                 onDragEnter={handleDrag}
                 onDrop={handleDrop}
@@ -50,11 +50,11 @@ export default function UploadFile({ setAudioFile }: UploadFileProps) {
                     htmlFor="file-upload"
                     className="z-20 flex flex-col-reverse items-center justify-center w-full h-full cursor-pointer"
                 >
-                    <p className="z-10 text-xs font-light text-center text-gray-500">
+                    <p className="text-xs font-light text-center text-gray-500">
                         Upload your audio here
                     </p>
                     <svg
-                        className="z-10 w-8 h-8 text-indigo-400"
+                        className="w-8 h-8 text-indigo-400"
                         fill="currentColor"
                         viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg"

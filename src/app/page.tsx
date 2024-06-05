@@ -13,8 +13,8 @@ export default function Home() {
     const [fragmetAudioTime, setFragmentAudioTime] = useState();
 
     return (
-        <main className="grid grid-cols-2 grid-rows-[auto_auto_auto_auto] h-fit justify-items-center">
-            <div className="col-span-2">
+        <main className="grid grid-cols-2 grid-rows-[auto_auto_auto_auto] h-fit justify-items-center gap-6 space-evenly">
+            <div className="col-span-2 m-2">
                 <p className="">English Speaking Activities</p>
             </div>
             <div className=" col-span-2 justify-center">
