@@ -11,7 +11,6 @@ export default function ReactPlayerComponent({
     const [hasPlayed, setHasPlayed] = useState(false);
 
     const getAudioLocalUrl = () => {
-     
         if (audioUrl) return audioUrl;
 
         const url = URL.createObjectURL(audioFile);
@@ -20,14 +19,33 @@ export default function ReactPlayerComponent({
 
     useEffect(() => {
         // Clear the object URL to free up memory when the component unmounts
-        setIsPlaying(true)
-        setHasPlayed(false)
         return () => {
             if (audioFile) {
                 URL.revokeObjectURL(audioFile);
             }
         };
-    }, [audioFile, fragmetAudioTime]);
+    }, [audioFile]);
+
+    useEffect(() => {
+        console.log(" AHORA");
+        if (
+            playerRef.current &&
+            fragmetAudioTime?.audio_start_time &&
+            !hasPlayed
+        ) {
+            console.log("HERE");
+            playerRef.current.seekTo(
+                fragmetAudioTime.audio_start_time,
+                "seconds"
+            );
+            setIsPlaying(true);
+        }
+    }, [hasPlayed, fragmetAudioTime]);
+
+    useEffect(() => {
+        console.log(fragmetAudioTime);
+        setHasPlayed(false);
+    }, [fragmetAudioTime]);
 
     if (!(audioFile || audioUrl)) return <></>;
 
@@ -36,9 +54,8 @@ export default function ReactPlayerComponent({
             ref={playerRef}
             url={getAudioLocalUrl()}
             controls={true}
-            playing={!!fragmetAudioTime?.audio_start_time && isPlaying} // Control the playback state
-            onPlay={() => {
-                console.log(playerRef.current);
+            playing={isPlaying} // Control the playback state
+            onStart={() => {
                 if (
                     playerRef.current &&
                     fragmetAudioTime?.audio_start_time &&
@@ -59,7 +76,7 @@ export default function ReactPlayerComponent({
                     if (playedSeconds >= fragmetAudioTime.audio_end_time) {
                         setIsPlaying(false);
                         setHasPlayed(true);
-                        fragmetAudioTime = {}
+                        // fragmetAudioTime = {};
                     }
                 }
             }}
