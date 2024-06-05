@@ -10,6 +10,8 @@ export default function Home() {
     const [audioFile, setAudioFile] = useState(null);
     const [audioUrl, setAudioUrl] = useState(null);
 
+    const [fragmetAudioTime, setFragmentAudioTime] = useState()
+
     return (
         <main className=" min-h-screen flex-col items-center ">
             <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
@@ -19,8 +21,16 @@ export default function Home() {
                 <UploadFile setAudioFile={setAudioFile} />
                 <AudioUrlInput setAudioUrl={setAudioUrl} />
             </div>
-                <ReactPlayerComponent audioFile={audioFile} audioUrl={audioUrl} />
-                <ExerciseBoard audioFile={audioFile} audioUrl={audioUrl} />
+            <ReactPlayerComponent
+                audioFile={audioFile}
+                audioUrl={audioUrl}
+                fragmetAudioTime={fragmetAudioTime}
+            />
+            <ExerciseBoard
+                audioFile={audioFile}
+                audioUrl={audioUrl}
+                setFragmentAudioTime={setFragmentAudioTime}
+            />
         </main>
     );
 }

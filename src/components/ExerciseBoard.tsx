@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import ExerciseCards from "./ExerciseCards";
 
-export default function ExerciseBoard({ audioFile, audioUrl }: any) {
+export default function ExerciseBoard({ audioFile, audioUrl, setFragmentAudioTime }: any) {
     const [isProcessing, setIsProcessing] = useState(true);
     const [audioSummary, setAudioSummary] = useState([]);
 
@@ -47,7 +47,14 @@ export default function ExerciseBoard({ audioFile, audioUrl }: any) {
                     </div>
                 </div>
             ) : (
-                <>{<ExerciseCards audioSummary={audioSummary} />}</>
+                <>
+                    {
+                        <ExerciseCards
+                            audioSummary={audioSummary}
+                            setFragmentAudioTime={setFragmentAudioTime}
+                        />
+                    }
+                </>
             )}
         </>
     );
