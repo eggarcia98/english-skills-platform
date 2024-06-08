@@ -79,7 +79,7 @@ export default function ExerciseCards({
 
     return (
         <div className=" overflow-hidden">
-            <div className="w-full max-w-5xl mx-auto px-4 md:px-6 py-5">
+            <div className="w-full min-w-[430px] max-w-5xl mx-auto px-4 md:px-6 py-5">
                 <section className="px-12">
                     <div className="max-w-lg mx-auto relative">
                         {cardsData.map(

@@ -18,21 +18,21 @@ export default function Home() {
                 <div className="col-span-2 m-2">
                     <p className="">English Speaking Activities</p>
                 </div>
-                <div className="col-span-2 w-full">
+                <div className="w-full col-span-2 ">
                     <div className="flex flex-col w-full items-center ">
                         <UploadFile setAudioFile={setAudioFile} />
                         <AudioUrlInput setAudioUrl={setAudioUrl} />
                     </div>
                 </div>
 
-                <div className="w-full ">
+                <div className="w-full col-span-2 lg:col-span-1">
                     <ReactPlayerComponent
                         audioFile={audioFile}
                         audioUrl={audioUrl}
                         fragmetAudioTime={fragmetAudioTime}
                     />
                 </div>
-                <div className="w-full  ">
+                <div className="w-full col-span-2 lg:col-span-1">
                     <ExerciseBoard
                         audioFile={audioFile}
                         audioUrl={audioUrl}

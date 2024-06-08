@@ -54,6 +54,9 @@ export default function ReactPlayerComponent({
             ref={playerRef}
             url={getAudioLocalUrl()}
             controls={true}
+            width="100%"
+            height="100%"
+            className="hidden-video"
             playing={isPlaying} // Control the playback state
             onStart={() => {
                 if (
