@@ -27,13 +27,11 @@ export default function ReactPlayerComponent({
     }, [audioFile]);
 
     useEffect(() => {
-        console.log(" AHORA");
         if (
             playerRef.current &&
             fragmetAudioTime?.audio_start_time &&
             !hasPlayed
         ) {
-            console.log("HERE");
             playerRef.current.seekTo(
                 fragmetAudioTime.audio_start_time,
                 "seconds"
@@ -43,7 +41,6 @@ export default function ReactPlayerComponent({
     }, [hasPlayed, fragmetAudioTime]);
 
     useEffect(() => {
-        console.log(fragmetAudioTime);
         setHasPlayed(false);
     }, [fragmetAudioTime]);
 

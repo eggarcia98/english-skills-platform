@@ -5,6 +5,7 @@ interface AudioSummary {
     audio_start_time: number;
     chunk_start_time: number;
     transcript: string;
+    isApproved?: boolean;
 }
 
 export default function ExerciseCards({
@@ -21,8 +22,8 @@ export default function ExerciseCards({
         twoPrevious: cardsData.length - 2,
     }); // Initialize with the first card
 
-    const sendTImeToPlayOnPlayer = () => {
-        return true;
+    const sendTImefragmentToPlayer = (audioFragment: AudioSummary) => {
+        setFragmentAudioTime(audioFragment);
     };
 
     const updateIndexAround = (currentIndex: number) => {
@@ -54,11 +55,9 @@ export default function ExerciseCards({
         };
         setIndexCardsAround(indexCardsAround);
 
-        console.log({ ...indexCardsAround, currentIndex });
     };
     const handleNext = () => {
         setCurrentIndex((prevIndex) => {
-            console.log({ prevIndex });
             const currentIndex =
                 prevIndex === cardsData.length - 1 ? 0 : prevIndex + 1;
 
@@ -77,16 +76,34 @@ export default function ExerciseCards({
         }); // Wrap around to the last card
     };
 
+    const evaluateAnswer = (event: any, audioFragment: AudioSummary, index: number) => {
+        if (event.key !== "Enter") return
+
+        const userAnswerParsed = event.target.value
+            .toLowerCase()
+            .replace(/\s/g, "")
+            .replaceAll(",", "");
+        
+        const correctAnswerParsed = audioFragment.transcript
+            .toLowerCase()
+            .replace(/\s/g, "")
+            .replaceAll(",", "");
+       
+        if (correctAnswerParsed === userAnswerParsed) {
+            const cardDataItemCopy = [...cardsData];
+            cardDataItemCopy[index]["isApproved"] = true;
+
+            setCardsData(cardDataItemCopy);
+        }
+    }
+
     return (
         <div className=" overflow-hidden">
             <div className="w-full min-w-[430px] max-w-5xl mx-auto px-4 md:px-6 py-5">
                 <section className="px-12">
                     <div className="max-w-lg mx-auto relative">
                         {cardsData.map(
-                            (
-                                { transcript, ...rest }: AudioSummary,
-                                index: number
-                            ) => (
+                            (audioFragment: AudioSummary, index: number) => (
                                 <div
                                     key={index}
                                     className={`
@@ -140,6 +157,7 @@ export default function ExerciseCards({
                                                 rows={4}
                                                 className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                                 placeholder="What did you here?"
+                                                onKeyUp={(event) => evaluateAnswer(event,audioFragment, index)}
                                             ></textarea>
 
                                             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
@@ -147,8 +165,8 @@ export default function ExerciseCards({
                                                     type="button"
                                                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 text-base font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                                                     onClick={() =>
-                                                        setFragmentAudioTime(
-                                                            rest
+                                                        sendTImefragmentToPlayer(
+                                                            audioFragment
                                                         )
                                                     }
                                                 >
@@ -164,13 +182,21 @@ export default function ExerciseCards({
                                         </div>
                                         <footer className="flex justify-between">
                                             <button
-                                                className="text-sm font-medium text-indigo-500 hover:underline "
+                                                className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
+                                                    index > 0
+                                                        ? ""
+                                                        : "opacity-50 cursor-not-allowed"
+                                                    }`}
                                                 onClick={handlePrevious}
                                             >
-                                                Previous
+                                                Prev
                                             </button>
                                             <button
-                                                className="text-sm font-medium text-indigo-500 hover:underline"
+                                                className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r ${
+                                                    audioFragment.isApproved
+                                                        ? ""
+                                                        : "opacity-50 cursor-not-allowed"
+                                                    }`}
                                                 onClick={handleNext}
                                             >
                                                 Next

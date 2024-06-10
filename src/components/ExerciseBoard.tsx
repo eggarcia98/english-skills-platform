@@ -11,7 +11,6 @@ export default function ExerciseBoard({
 
     useEffect(() => {
         setIsProcessing(true);
-        console.log(!!audioFile ? audioFile : { url: audioUrl });
         fetch("http://localhost:6030/summarize_audio", {
             headers: {
                 "Content-Type": !!audioFile ? "audio/*" : "application/json",
@@ -25,7 +24,6 @@ export default function ExerciseBoard({
             .then(({ data, error }) => {
                 setAudioSummary(error ? [] : data);
                 setIsProcessing(error ? true : false);
-                console.log({ data }, error ? true : false);
             })
             .catch((error) => console.log({ error }));
     }, [audioFile, audioUrl]);
