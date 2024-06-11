@@ -27,6 +27,8 @@ export default function ReactPlayerComponent({
     }, [audioFile]);
 
     useEffect(() => {
+        console.log("CHANGE Q");
+
         if (
             playerRef.current &&
             fragmetAudioTime?.audio_start_time &&
@@ -41,6 +43,8 @@ export default function ReactPlayerComponent({
     }, [hasPlayed, fragmetAudioTime]);
 
     useEffect(() => {
+        console.log("CHANGE A");
+
         setHasPlayed(false);
     }, [fragmetAudioTime]);
 

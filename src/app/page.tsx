@@ -19,7 +19,7 @@ export default function Home() {
                    🗣️ English Speaking Activities
                 </p>
             </div>
-            <main className="grid grid-cols-2 grid-rows-[auto_auto_auto_auto] h-fit justify-items-center gap-6 space-evenly m-5 ">
+            <main className="grid grid-cols-2 grid-rows-[auto_auto_auto_auto] h-fit justify-items-center gap-6 space-evenly m-5">
                 <div className="w-full col-span-2 ">
                     <div className="flex flex-col w-full items-center ">
                         <UploadFile setAudioFile={setAudioFile} />
@@ -31,7 +31,7 @@ export default function Home() {
                 <div className="w-full col-span-2 lg:col-span-1">
                     <ReactPlayerComponent
                         audioFile={audioFile}
-                        audioUrl={audioUrl}
+                        audioUrl={audioUrl}              
                         fragmetAudioTime={fragmetAudioTime}
                     />
                 </div>
