@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface AudioSummary {
     audio_end_time: number;
@@ -6,6 +6,7 @@ interface AudioSummary {
     chunk_start_time: number;
     transcript: string;
     isApproved?: boolean;
+    hints?: string;
 }
 
 export default function ExerciseCards({
@@ -23,7 +24,7 @@ export default function ExerciseCards({
     }); // Initialize with the first card
 
     const sendTImefragmentToPlayer = (audioFragment: AudioSummary) => {
-        setFragmentAudioTime({...audioFragment});
+        setFragmentAudioTime({ ...audioFragment });
     };
 
     const updateIndexAround = (currentIndex: number) => {
@@ -80,17 +81,48 @@ export default function ExerciseCards({
         audioFragment: AudioSummary,
         index: number
     ) => {
+
         if (event.key !== "Enter") return;
 
         const userAnswerParsed = event.target.value
+            .trim()
             .toLowerCase()
-            .replace(/\s/g, "")
             .replaceAll(",", "");
 
         const correctAnswerParsed = audioFragment.transcript
+            .trim()
             .toLowerCase()
-            .replace(/\s/g, "")
             .replaceAll(",", "");
+
+        const userAnswerdWords = userAnswerParsed.split(" ");
+        const correctAnswerdWords = correctAnswerParsed.split(" ");
+        console.log(correctAnswerdWords);
+
+        const hintList = [];
+        let isFirstErrorSetted = false;
+        for (let i = 0; i < correctAnswerdWords.length; i++) {
+            console.log(userAnswerdWords[i], correctAnswerdWords[i]);
+            if (
+                userAnswerdWords[i] !== correctAnswerdWords[i] &&
+                isFirstErrorSetted
+            )
+                hintList.push(
+                    "_".repeat((correctAnswerdWords[i] ?? "").length)
+                );
+            else if (userAnswerdWords[i] === correctAnswerdWords[i]) {
+                hintList.push(audioFragment.transcript.split(" ")[i]);
+            } else {
+                hintList.push(
+                    `<b>${audioFragment.transcript.split(" ")[i]}</b>`
+                );
+                isFirstErrorSetted = true;
+            }
+        }
+
+        const cardDataItemCopy = [...cardsData];
+        cardDataItemCopy[index]["hints"] = hintList.join(" ");
+
+        setCardsData(cardDataItemCopy);
 
         if (correctAnswerParsed === userAnswerParsed) {
             const cardDataItemCopy = [...cardsData];
@@ -149,12 +181,17 @@ export default function ExerciseCards({
                                             </h2>
                                         </header>
                                         <div className="text-sm leading-relaxed text-slate-500 space-y-4 mb-2">
-                                            {/* <label
+                                            <label
                                                 htmlFor="message"
                                                 className="block mb-2 text-sm justify-items-end font-medium text-gray-900 dark:text-gray-400"
                                             >
-                                                Words to guess: 
-                                            </label> */}
+                                                <div
+                                                    id={index}
+                                                    dangerouslySetInnerHTML={{
+                                                        __html: audioFragment.hints,
+                                                    }}
+                                                />
+                                            </label>
                                             <textarea
                                                 id="message"
                                                 rows={4}
@@ -196,6 +233,7 @@ export default function ExerciseCards({
                                                         ? ""
                                                         : "opacity-50 cursor-not-allowed"
                                                 }`}
+                                                disabled={index === 0}
                                                 onClick={handlePrevious}
                                             >
                                                 Prev
@@ -206,6 +244,9 @@ export default function ExerciseCards({
                                                         ? ""
                                                         : "opacity-50 cursor-not-allowed"
                                                 }`}
+                                                disabled={
+                                                    !audioFragment.isApproved
+                                                }
                                                 onClick={handleNext}
                                             >
                                                 Next
