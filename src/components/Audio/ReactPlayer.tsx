@@ -6,7 +6,7 @@ export default function ReactPlayerComponent({
     audioUrl,
     fragmetAudioTime,
 }: any) {
-    const playerRef = useRef(null);
+    const playerRef = useRef<ReactPlayer>(null);
     const [isPlaying, setIsPlaying] = useState(true);
     const [hasPlayed, setHasPlayed] = useState(false);
 
@@ -27,7 +27,6 @@ export default function ReactPlayerComponent({
     }, [audioFile]);
 
     useEffect(() => {
-        console.log("CHANGE Q");
 
         if (
             playerRef.current &&
@@ -43,7 +42,6 @@ export default function ReactPlayerComponent({
     }, [hasPlayed, fragmetAudioTime]);
 
     useEffect(() => {
-        console.log("CHANGE A");
 
         setHasPlayed(false);
     }, [fragmetAudioTime]);

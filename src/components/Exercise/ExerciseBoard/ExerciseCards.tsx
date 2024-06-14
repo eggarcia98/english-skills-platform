@@ -186,9 +186,8 @@ export default function ExerciseCards({
                                                 className="block mb-2 text-sm justify-items-end font-medium text-gray-900 dark:text-gray-400"
                                             >
                                                 <div
-                                                    id={index}
                                                     dangerouslySetInnerHTML={{
-                                                        __html: audioFragment.hints,
+                                                        __html: audioFragment.hints ?? "",
                                                     }}
                                                 />
                                             </label>
