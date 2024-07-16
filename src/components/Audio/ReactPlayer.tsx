@@ -9,16 +9,10 @@ export default function ReactPlayerComponent({
     const playerRef = useRef<ReactPlayer>(null);
     const [isPlaying, setIsPlaying] = useState(true);
     const [hasPlayed, setHasPlayed] = useState(false);
-
-    const getAudioLocalUrl = () => {
-        if (audioUrl) return audioUrl;
-
-        const url = URL.createObjectURL(audioFile);
-        return url;
-    };
+    const [fragmentAudioTimeChanged, setFragmentAudioTimeChanged] =
+        useState(false);
 
     useEffect(() => {
-        // Clear the object URL to free up memory when the component unmounts
         return () => {
             if (audioFile) {
                 URL.revokeObjectURL(audioFile);
@@ -27,23 +21,31 @@ export default function ReactPlayerComponent({
     }, [audioFile]);
 
     useEffect(() => {
-        if (
-            playerRef.current &&
-            fragmetAudioTime?.audio_start_time &&
-            !hasPlayed
-        ) {
+        restartAudioToAudioFragmentStartTimeSetted();
+    }, [hasPlayed, fragmetAudioTime]);
+
+    useEffect(() => {
+        setFragmentAudioTimeChanged(true);
+        setHasPlayed(false);
+    }, [fragmetAudioTime]);
+
+    const getAudioLocalUrl = () => {
+        if (audioUrl) return audioUrl;
+
+        const url = URL.createObjectURL(audioFile);
+        return url;
+    };
+
+    const restartAudioToAudioFragmentStartTimeSetted = () => {
+        if (playerRef.current && fragmentAudioTimeChanged && !hasPlayed) {
             playerRef.current.seekTo(
                 fragmetAudioTime.audio_start_time,
                 "seconds"
             );
             setIsPlaying(true);
+            setFragmentAudioTimeChanged(false);
         }
-    }, [hasPlayed, fragmetAudioTime]);
-
-    useEffect(() => {
-        console.log("CAMBIO");
-        setHasPlayed(false);
-    }, [fragmetAudioTime]);
+    };
 
     if (!(audioFile || audioUrl)) return <></>;
 
@@ -56,28 +58,17 @@ export default function ReactPlayerComponent({
             height="100%"
             className="hidden-video"
             playing={isPlaying} // Control the playback state
-            onStart={() => {
-                if (
-                    playerRef.current &&
-                    fragmetAudioTime?.audio_start_time &&
-                    !hasPlayed
-                ) {
-                    playerRef.current.seekTo(
-                        fragmetAudioTime.audio_start_time,
-                        "seconds"
-                    );
-                }
-            }}
+            onStart={restartAudioToAudioFragmentStartTimeSetted}
             onProgress={({ playedSeconds }) => {
                 if (
                     playerRef.current &&
-                    fragmetAudioTime?.audio_end_time &&
+                    fragmentAudioTimeChanged &&
                     !hasPlayed
                 ) {
                     if (playedSeconds >= fragmetAudioTime.audio_end_time) {
+                        setFragmentAudioTimeChanged(false);
                         setIsPlaying(false);
                         setHasPlayed(true);
-                        // fragmetAudioTime = {};
                     }
                 }
             }}
