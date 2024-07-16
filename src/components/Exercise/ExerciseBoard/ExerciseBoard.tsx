@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import ExerciseCards from "./ExerciseCards";
 
+import { ExerciseBoardProps } from "@/types";
+
 export default function ExerciseBoard({
     audioFile,
     audioUrl,
     setFragmentAudioTime,
-}: any) {
+}: ExerciseBoardProps) {
     const [isProcessing, setIsProcessing] = useState(true);
     const [audioSummary, setAudioSummary] = useState([]);
 
@@ -48,7 +50,7 @@ export default function ExerciseBoard({
                 <>
                     {
                         <ExerciseCards
-                            audioSummary={audioSummary}
+                            fragmentsAudioData={audioSummary}
                             setFragmentAudioTime={setFragmentAudioTime}
                         />
                     }

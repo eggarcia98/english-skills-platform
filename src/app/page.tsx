@@ -3,7 +3,7 @@ import ExerciseBoard from "@/components/Exercise/ExerciseBoard";
 import ReactPlayerComponent from "@/components/Audio/ReactPlayer";
 import UploadFile from "@/components/Audio/UploadFile";
 
-import React, { useState } from "react";
+import React, { Dispatch, SetStateAction, useState } from "react";
 import AudioUrlInput from "@/components/Audio/AudioUrlInput";
 
 export default function Home() {
@@ -38,7 +38,7 @@ export default function Home() {
                     <ExerciseBoard
                         audioFile={audioFile}
                         audioUrl={audioUrl}
-                        setFragmentAudioTime={setFragmentAudioTime}
+                        setFragmentAudioTime={() => setFragmentAudioTime}
                     />
                 </div>
             </main>

@@ -1,19 +1,11 @@
 import React, { useEffect, useState } from "react";
-
-interface AudioSummary {
-    audio_end_time: number;
-    audio_start_time: number;
-    chunk_start_time: number;
-    transcript: string;
-    isApproved?: boolean;
-    hints?: string;
-}
+import { ExerciseCardsProps, FragmentAudioData } from "@/types";
 
 export default function ExerciseCards({
-    audioSummary,
+    fragmentsAudioData,
     setFragmentAudioTime,
-}: any) {
-    const [cardsData, setCardsData] = useState(audioSummary);
+}: ExerciseCardsProps) {
+    const [cardsData, setCardsData] = useState(fragmentsAudioData);
 
     const [currentIndex, setCurrentIndex] = useState(0); // Initialize with the first card
     const [indexCardsAround, setIndexCardsAround] = useState({
@@ -23,7 +15,10 @@ export default function ExerciseCards({
         twoPrevious: cardsData.length - 2,
     }); // Initialize with the first card
 
-    const sendTImefragmentToPlayer = (audioFragment: AudioSummary) => {
+    const sendTImefragmentToPlayer = (audioFragment: FragmentAudioData) => {
+        console.log({ ...audioFragment });
+
+        setFragmentAudioTime(null);
         setFragmentAudioTime({ ...audioFragment });
     };
 
@@ -78,10 +73,9 @@ export default function ExerciseCards({
 
     const evaluateAnswer = (
         event: any,
-        audioFragment: AudioSummary,
+        audioFragment: FragmentAudioData,
         index: number
     ) => {
-
         if (event.key !== "Enter") return;
 
         const userAnswerParsed = event.target.value
@@ -138,14 +132,17 @@ export default function ExerciseCards({
                 <section className="px-12">
                     <div className="max-w-lg mx-auto relative">
                         {cardsData.map(
-                            (audioFragment: AudioSummary, index: number) => (
+                            (
+                                audioFragment: FragmentAudioData,
+                                index: number
+                            ) => (
                                 <div
                                     key={index}
                                     className={`
                                         absolute inset-0 scale-[67.5%] z-20 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
                                         ${
                                             currentIndex === index
-                                                ? "relative z-50 translate-x-0 scale-[103%]"
+                                                ? "relative z-50 translate-x-0 scale-[100%]"
                                                 : ""
                                         }
                                         ${
@@ -187,7 +184,9 @@ export default function ExerciseCards({
                                             >
                                                 <div
                                                     dangerouslySetInnerHTML={{
-                                                        __html: audioFragment.hints ?? "",
+                                                        __html:
+                                                            audioFragment.hints ??
+                                                            "",
                                                     }}
                                                 />
                                             </label>
