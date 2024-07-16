@@ -5,12 +5,15 @@ import UploadFile from "@/components/Audio/UploadFile";
 
 import React, { Dispatch, SetStateAction, useState } from "react";
 import AudioUrlInput from "@/components/Audio/AudioUrlInput";
+import { FragmentAudioData } from "@/types";
 
 export default function Home() {
     const [audioFile, setAudioFile] = useState(null);
     const [audioUrl, setAudioUrl] = useState(null);
 
-    const [fragmetAudioTime, setFragmentAudioTime] = useState();
+    const [fragmetAudioTime, setFragmentAudioTime] = useState(
+        {} as FragmentAudioData
+    );
 
     return (
         <div className="h-screen bg-slate-50">
@@ -38,7 +41,7 @@ export default function Home() {
                     <ExerciseBoard
                         audioFile={audioFile}
                         audioUrl={audioUrl}
-                        setFragmentAudioTime={() => setFragmentAudioTime}
+                        setFragmentAudioTime={setFragmentAudioTime}
                     />
                 </div>
             </main>

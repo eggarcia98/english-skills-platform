@@ -17,8 +17,6 @@ export default function ExerciseCards({
 
     const sendTImefragmentToPlayer = (audioFragment: FragmentAudioData) => {
         console.log({ ...audioFragment });
-
-        setFragmentAudioTime(null);
         setFragmentAudioTime({ ...audioFragment });
     };
 

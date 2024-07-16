@@ -5,11 +5,14 @@ export interface ExerciseBoardProps {
     audioFile: File | null;
     audioUrl: string | null;
     setFragmentAudioTime: React.Dispatch<
-        React.SetStateAction<FragmentAudioData | null>
+        React.SetStateAction<FragmentAudioData>
     >;
+    userRequestPlayAudioFragment?: void;
 }
 
 export interface ExerciseCardsProps {
     fragmentsAudioData: FragmentAudioData[];
-    setFragmentAudioTime: Dispatch<SetStateAction<FragmentAudioData | null>> ;
+    setFragmentAudioTime: React.Dispatch<
+        React.SetStateAction<FragmentAudioData>
+    >;
 }
