@@ -7,18 +7,13 @@ export default function ExerciseCards({
 }: ExerciseCardsProps) {
     const [cardsData, setCardsData] = useState(fragmentsAudioData);
 
-    const [currentIndex, setCurrentIndex] = useState(0); // Initialize with the first card
+    const [currentIndex, setCurrentIndex] = useState(0);
     const [indexCardsAround, setIndexCardsAround] = useState({
         oneNext: 1,
         twoNext: 2,
         onePrevious: cardsData.length - 1,
         twoPrevious: cardsData.length - 2,
-    }); // Initialize with the first card
-
-    const sendTImefragmentToPlayer = (audioFragment: FragmentAudioData) => {
-        console.log({ ...audioFragment });
-        setFragmentAudioTime({ ...audioFragment });
-    };
+    });
 
     const updateIndexAround = (currentIndex: number) => {
         const onePrevious =
@@ -49,6 +44,7 @@ export default function ExerciseCards({
         };
         setIndexCardsAround(indexCardsAround);
     };
+
     const handleNext = () => {
         setCurrentIndex((prevIndex) => {
             const currentIndex =
@@ -69,28 +65,29 @@ export default function ExerciseCards({
         }); // Wrap around to the last card
     };
 
+    const sanitizeText = (originalText: string) => {
+        let sanitizedText = originalText
+            .replace(/[,.?!]/g, "")
+            .toLowerCase()
+            .trim();
+        return sanitizedText;
+    };
+
     const evaluateAnswer = (
         event: any,
         audioFragment: FragmentAudioData,
         index: number
     ) => {
+        console.log(event.key);
         if (event.key !== "Enter") return;
 
-        const userAnswerParsed = event.target.value
-            .trim()
-            .toLowerCase()
-            .replaceAll(",", "");
+        const userAnswerSanitized = sanitizeText(event.target.value);
+        const correctAnswerSanitized = sanitizeText(audioFragment.transcript);
 
-        const correctAnswerParsed = audioFragment.transcript
-            .trim()
-            .toLowerCase()
-            .replaceAll(",", "");
+        const userAnswerdWords = userAnswerSanitized.split(" ");
+        const correctAnswerdWords = correctAnswerSanitized.split(" ");
 
-        const userAnswerdWords = userAnswerParsed.split(" ");
-        const correctAnswerdWords = correctAnswerParsed.split(" ");
-        console.log(correctAnswerdWords);
-
-        const hintList = [];
+        const hintList = ["✭"];
         let isFirstErrorSetted = false;
         for (let i = 0; i < correctAnswerdWords.length; i++) {
             console.log(userAnswerdWords[i], correctAnswerdWords[i]);
@@ -105,7 +102,9 @@ export default function ExerciseCards({
                 hintList.push(audioFragment.transcript.split(" ")[i]);
             } else {
                 hintList.push(
-                    `<b>${audioFragment.transcript.split(" ")[i]}</b>`
+                    `<b class="text-red-300">${
+                        audioFragment.transcript.split(" ")[i]
+                    }</b>`
                 );
                 isFirstErrorSetted = true;
             }
@@ -116,7 +115,7 @@ export default function ExerciseCards({
 
         setCardsData(cardDataItemCopy);
 
-        if (correctAnswerParsed === userAnswerParsed) {
+        if (correctAnswerSanitized === userAnswerSanitized) {
             const cardDataItemCopy = [...cardsData];
             cardDataItemCopy[index]["isApproved"] = true;
 
@@ -169,25 +168,29 @@ export default function ExerciseCards({
                                     `}
                                 >
                                     <article className="bg-white p-6 rounded-lg shadow-2xl">
-                                        <header className="mb-5">
-                                            <h2 className="block antialiased tracking-normal font-sans sm:text-3xl text-4xl font-semibold leading-[1.3] text-slate-900 mb-4">
+                                        <header className="">
+                                            <h2 className="block antialiased tracking-normal font-sans sm:text-3xl text-4xl font-semibold leading-[1.3] text-slate-900 ">
                                                 Exercise ({index + 1}/
                                                 {cardsData.length})
                                             </h2>
                                         </header>
-                                        <div className="text-sm leading-relaxed text-slate-500 space-y-4 mb-2">
-                                            <label
-                                                htmlFor="message"
-                                                className="block mb-2 text-sm justify-items-end font-medium text-gray-900 dark:text-gray-400"
+                                        <div className="leading-relaxed  text-xs">
+                                            <div
+                                                className={`flex ${
+                                                    audioFragment.isApproved
+                                                        ? "text-green-600"
+                                                        : "text-gray-400"
+                                                }  `}
                                             >
                                                 <div
+                                                    className="mb-3 text-xs self-center"
                                                     dangerouslySetInnerHTML={{
                                                         __html:
                                                             audioFragment.hints ??
                                                             "",
                                                     }}
                                                 />
-                                            </label>
+                                            </div>
                                             <textarea
                                                 id="message"
                                                 rows={4}
@@ -201,15 +204,14 @@ export default function ExerciseCards({
                                                     )
                                                 }
                                             ></textarea>
-
                                             <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                                 <button
                                                     type="button"
                                                     className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 text-base font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
                                                     onClick={() =>
-                                                        sendTImefragmentToPlayer(
-                                                            audioFragment
-                                                        )
+                                                        setFragmentAudioTime({
+                                                            ...audioFragment,
+                                                        })
                                                     }
                                                 >
                                                     Play ▷

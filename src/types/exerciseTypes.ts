@@ -1,4 +1,3 @@
-import { Dispatch, SetStateAction } from "react";
 import { FragmentAudioData } from "./audioTypes";
 
 export interface ExerciseBoardProps {

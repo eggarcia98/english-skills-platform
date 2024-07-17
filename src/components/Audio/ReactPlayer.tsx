@@ -50,28 +50,30 @@ export default function ReactPlayerComponent({
     if (!(audioFile || audioUrl)) return <></>;
 
     return (
-        <ReactPlayer
-            ref={playerRef}
-            url={getAudioLocalUrl()}
-            controls={true}
-            width="100%"
-            height="100%"
-            className="hidden-video"
-            playing={isPlaying} // Control the playback state
-            onStart={restartAudioToAudioFragmentStartTimeSetted}
-            onProgress={({ playedSeconds }) => {
-                if (
-                    playerRef.current &&
-                    fragmentAudioTimeChanged &&
-                    !hasPlayed
-                ) {
-                    if (playedSeconds >= fragmetAudioTime.audio_end_time) {
-                        setFragmentAudioTimeChanged(false);
-                        setIsPlaying(false);
-                        setHasPlayed(true);
+        <div className="lg:h-full h-48">
+            <ReactPlayer
+                ref={playerRef}
+                url={getAudioLocalUrl()}
+                controls={true}
+                width="100%"
+                height="100%"
+                className="hidden-video"
+                playing={isPlaying} // Control the playback state
+                onStart={restartAudioToAudioFragmentStartTimeSetted}
+                onProgress={({ playedSeconds }) => {
+                    if (
+                        playerRef.current &&
+                        fragmentAudioTimeChanged &&
+                        !hasPlayed
+                    ) {
+                        if (playedSeconds >= fragmetAudioTime.audio_end_time) {
+                            setFragmentAudioTimeChanged(false);
+                            setIsPlaying(false);
+                            setHasPlayed(true);
+                        }
                     }
-                }
-            }}
-        />
+                }}
+            />
+        </div>
     );
 }
