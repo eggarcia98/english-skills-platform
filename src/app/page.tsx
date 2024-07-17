@@ -16,7 +16,7 @@ export default function Home() {
     );
 
     return (
-        <div className=" bg-slate-50">
+        <div className="h-screen  bg-slate-50">
             <div className="sticky bg-slate-50 top-0 col-span-2 w-full h-16 flex justify-center border-b-[0.01rem] border-gray-600">
                 <p className="place-self-center text-center font-mono text-lg dark:text-black">
                     🗣️ English Speaking Activities

@@ -13,7 +13,7 @@ export default function ExerciseBoard({
 
     useEffect(() => {
         setIsProcessing(true);
-        fetch("http://localhost:6030/summarize_audio", {
+        fetch("http://192.168.1.107:6030/summarize_audio", {
             headers: {
                 "Content-Type": !!audioFile ? "audio/*" : "application/json",
             },

@@ -50,7 +50,7 @@ export default function ReactPlayerComponent({
     if (!(audioFile || audioUrl)) return <></>;
 
     return (
-        <div className="lg:h-full h-48">
+        <div className="lg:h-full md:h-72 h-48">
             <ReactPlayer
                 ref={playerRef}
                 url={getAudioLocalUrl()}
