@@ -125,7 +125,7 @@ export default function ExerciseCards({
 
     return (
         <div className=" ">
-            <div className="w-full lg:min-w-[435px] max-w-lg mx-auto px-16 ">
+            <div className="w-full n-xs:min-w-[435px] max-w-lg mx-auto px-16 ">
                 <div className="relative">
                     {cardsData.map(
                         (audioFragment: FragmentAudioData, index: number) => (
@@ -164,7 +164,7 @@ export default function ExerciseCards({
                                     `}
                             >
                                 <article className="bg-white p-4 shadow-md shadow-gray-400 rounded-md border border-opacity-30 border-gray-600 font-sans">
-                                    <h2 className="block antialiased tracking-normal text-lg md:text-2xl lg:text-2xl font-semibold leading-[1.3] text-slate-900 ">
+                                    <h2 className="block antialiased tracking-normal text-lg n-xs:text-2xl font-semibold leading-[1.3] text-slate-900 ">
                                         Exercise ({index + 1}/{cardsData.length}
                                         )
                                     </h2>
@@ -177,7 +177,7 @@ export default function ExerciseCards({
                                             }  `}
                                         >
                                             <div
-                                                className="mb-3 text-[9px] md:text-xs lg:text-xs self-center"
+                                                className="mb-3 text-[9px] n-xs:text-xs self-center"
                                                 dangerouslySetInnerHTML={{
                                                     __html:
                                                         audioFragment.hints ??
@@ -188,7 +188,7 @@ export default function ExerciseCards({
                                         <textarea
                                             id="message"
                                             rows={4}
-                                            className="block p-1.5 w-full text-xs md:text-sm lg:text-sm text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
+                                            className="block n-xs:h-full h-16 p-1.5 w-full text-[11px] n-xs:text-sm text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                                             placeholder="What did you here?"
                                             onKeyUp={(event) =>
                                                 evaluateAnswer(
@@ -198,10 +198,10 @@ export default function ExerciseCards({
                                                 )
                                             }
                                         ></textarea>
-                                        <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
+                                        <div className="py-3 flex flex-row-reverse">
                                             <button
                                                 type="button"
-                                                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 text-base font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                                className=" inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 text-[10px] n-xs:text-sm w-auto ml-3 font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 "
                                                 onClick={() =>
                                                     setFragmentAudioTime({
                                                         ...audioFragment,
@@ -212,7 +212,7 @@ export default function ExerciseCards({
                                             </button>
                                             <button
                                                 type="button"
-                                                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                                className="w-auto inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-2 n-xs:px-4 py-2 bg-white text-[10px] n-xs:text-sm ml-3 font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 "
                                             >
                                                 Show hints
                                             </button>
@@ -220,7 +220,7 @@ export default function ExerciseCards({
                                     </div>
                                     <footer className="flex justify-between">
                                         <button
-                                            className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
+                                            className={`bg-gray-300 hover:bg-gray-400 text-[10px] n-xs:text-sm text-gray-800 font-bold py-2 px-4 rounded ${
                                                 index > 0
                                                     ? ""
                                                     : "opacity-50 cursor-not-allowed"
@@ -231,7 +231,7 @@ export default function ExerciseCards({
                                             Prev
                                         </button>
                                         <button
-                                            className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r ${
+                                            className={`bg-gray-300 hover:bg-gray-400 text-[10px] n-xs:text-sm text-gray-800 font-bold py-2 px-4 rounded ${
                                                 audioFragment.isApproved
                                                     ? ""
                                                     : "opacity-50 cursor-not-allowed"
