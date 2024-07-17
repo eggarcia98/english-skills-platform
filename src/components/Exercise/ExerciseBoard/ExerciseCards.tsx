@@ -163,12 +163,12 @@ export default function ExerciseCards({
                                         
                                     `}
                             >
-                                <article className="bg-white p-6 shadow-md shadow-gray-400 rounded-md border border-opacity-30 border-gray-600">
-                                    <h2 className="block antialiased tracking-normal font-sans sm:text-3xl text-4xl font-semibold leading-[1.3] text-slate-900 ">
+                                <article className="bg-white p-4 shadow-md shadow-gray-400 rounded-md border border-opacity-30 border-gray-600 font-sans">
+                                    <h2 className="block antialiased tracking-normal text-lg md:text-2xl lg:text-2xl font-semibold leading-[1.3] text-slate-900 ">
                                         Exercise ({index + 1}/{cardsData.length}
                                         )
                                     </h2>
-                                    <div className="leading-relaxed  text-xs">
+                                    <div className="leading-relaxed ">
                                         <div
                                             className={`flex ${
                                                 audioFragment.isApproved
@@ -177,7 +177,7 @@ export default function ExerciseCards({
                                             }  `}
                                         >
                                             <div
-                                                className="mb-3 text-xs self-center"
+                                                className="mb-3 text-[9px] md:text-xs lg:text-xs self-center"
                                                 dangerouslySetInnerHTML={{
                                                     __html:
                                                         audioFragment.hints ??
@@ -188,7 +188,7 @@ export default function ExerciseCards({
                                         <textarea
                                             id="message"
                                             rows={4}
-                                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            className="block p-1.5 w-full text-xs md:text-sm lg:text-sm text-gray-900 bg-gray-100 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500"
                                             placeholder="What did you here?"
                                             onKeyUp={(event) =>
                                                 evaluateAnswer(
