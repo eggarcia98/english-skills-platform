@@ -124,19 +124,15 @@ export default function ExerciseCards({
     };
 
     return (
-        <div className=" overflow-hidden">
-            <div className="w-full min-w-[435px] max-w-5xl mx-auto px-4 md:px-6 py-5">
-                <section className="px-12">
-                    <div className="max-w-lg mx-auto relative">
-                        {cardsData.map(
-                            (
-                                audioFragment: FragmentAudioData,
-                                index: number
-                            ) => (
-                                <div
-                                    key={index}
-                                    className={`
-                                        absolute inset-0 scale-[67.5%] z-20 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
+        <div className=" ">
+            <div className="w-full lg:min-w-[435px] max-w-lg mx-auto px-16 ">
+                <div className="relative">
+                    {cardsData.map(
+                        (audioFragment: FragmentAudioData, index: number) => (
+                            <div
+                                key={index}
+                                className={`
+                                        absolute inset-0 z-20 transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)]
                                         ${
                                             currentIndex === index
                                                 ? "relative z-50 translate-x-0 scale-[100%]"
@@ -166,96 +162,91 @@ export default function ExerciseCards({
                                          }
                                         
                                     `}
-                                >
-                                    <article className="bg-white p-6 rounded-lg shadow-2xl">
-                                        <header className="">
-                                            <h2 className="block antialiased tracking-normal font-sans sm:text-3xl text-4xl font-semibold leading-[1.3] text-slate-900 ">
-                                                Exercise ({index + 1}/
-                                                {cardsData.length})
-                                            </h2>
-                                        </header>
-                                        <div className="leading-relaxed  text-xs">
+                            >
+                                <article className="bg-white p-6 shadow-md shadow-gray-400 rounded-md border border-opacity-30 border-gray-600">
+                                    <h2 className="block antialiased tracking-normal font-sans sm:text-3xl text-4xl font-semibold leading-[1.3] text-slate-900 ">
+                                        Exercise ({index + 1}/{cardsData.length}
+                                        )
+                                    </h2>
+                                    <div className="leading-relaxed  text-xs">
+                                        <div
+                                            className={`flex ${
+                                                audioFragment.isApproved
+                                                    ? "text-green-600"
+                                                    : "text-gray-400"
+                                            }  `}
+                                        >
                                             <div
-                                                className={`flex ${
-                                                    audioFragment.isApproved
-                                                        ? "text-green-600"
-                                                        : "text-gray-400"
-                                                }  `}
-                                            >
-                                                <div
-                                                    className="mb-3 text-xs self-center"
-                                                    dangerouslySetInnerHTML={{
-                                                        __html:
-                                                            audioFragment.hints ??
-                                                            "",
-                                                    }}
-                                                />
-                                            </div>
-                                            <textarea
-                                                id="message"
-                                                rows={4}
-                                                className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                                placeholder="What did you here?"
-                                                onKeyUp={(event) =>
-                                                    evaluateAnswer(
-                                                        event,
-                                                        audioFragment,
-                                                        index
-                                                    )
-                                                }
-                                            ></textarea>
-                                            <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-                                                <button
-                                                    type="button"
-                                                    className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 text-base font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
-                                                    onClick={() =>
-                                                        setFragmentAudioTime({
-                                                            ...audioFragment,
-                                                        })
-                                                    }
-                                                >
-                                                    Play ▷
-                                                </button>
-                                                <button
-                                                    type="button"
-                                                    className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                                                >
-                                                    Show hints
-                                                </button>
-                                            </div>
+                                                className="mb-3 text-xs self-center"
+                                                dangerouslySetInnerHTML={{
+                                                    __html:
+                                                        audioFragment.hints ??
+                                                        "",
+                                                }}
+                                            />
                                         </div>
-                                        <footer className="flex justify-between">
+                                        <textarea
+                                            id="message"
+                                            rows={4}
+                                            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                            placeholder="What did you here?"
+                                            onKeyUp={(event) =>
+                                                evaluateAnswer(
+                                                    event,
+                                                    audioFragment,
+                                                    index
+                                                )
+                                            }
+                                        ></textarea>
+                                        <div className="bg-gray-50 px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
                                             <button
-                                                className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
-                                                    index > 0
-                                                        ? ""
-                                                        : "opacity-50 cursor-not-allowed"
-                                                }`}
-                                                disabled={index === 0}
-                                                onClick={handlePrevious}
-                                            >
-                                                Prev
-                                            </button>
-                                            <button
-                                                className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r ${
-                                                    audioFragment.isApproved
-                                                        ? ""
-                                                        : "opacity-50 cursor-not-allowed"
-                                                }`}
-                                                disabled={
-                                                    !audioFragment.isApproved
+                                                type="button"
+                                                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-green-700 text-base font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 sm:ml-3 sm:w-auto sm:text-sm"
+                                                onClick={() =>
+                                                    setFragmentAudioTime({
+                                                        ...audioFragment,
+                                                    })
                                                 }
-                                                onClick={handleNext}
                                             >
-                                                Next
+                                                Play ▷
                                             </button>
-                                        </footer>
-                                    </article>
-                                </div>
-                            )
-                        )}
-                    </div>
-                </section>
+                                            <button
+                                                type="button"
+                                                className="mt-3 w-full inline-flex justify-center rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-base font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-200 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                                            >
+                                                Show hints
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <footer className="flex justify-between">
+                                        <button
+                                            className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-l ${
+                                                index > 0
+                                                    ? ""
+                                                    : "opacity-50 cursor-not-allowed"
+                                            }`}
+                                            disabled={index === 0}
+                                            onClick={handlePrevious}
+                                        >
+                                            Prev
+                                        </button>
+                                        <button
+                                            className={`bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded-r ${
+                                                audioFragment.isApproved
+                                                    ? ""
+                                                    : "opacity-50 cursor-not-allowed"
+                                            }`}
+                                            disabled={!audioFragment.isApproved}
+                                            onClick={handleNext}
+                                        >
+                                            Next
+                                        </button>
+                                    </footer>
+                                </article>
+                            </div>
+                        )
+                    )}
+                </div>
             </div>
         </div>
     );
