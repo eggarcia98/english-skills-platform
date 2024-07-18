@@ -3,6 +3,11 @@ import ExerciseCards from "./ExerciseCards";
 
 import { ExerciseBoardProps } from "@/types";
 
+interface AudioSources {
+    file?: File | null;
+    url?: string | null;
+}
+
 export default function ExerciseBoard({
     audioFile,
     audioUrl,
@@ -11,14 +16,16 @@ export default function ExerciseBoard({
     const [isProcessing, setIsProcessing] = useState(true);
     const [audioSummary, setAudioSummary] = useState([]);
 
-    useEffect(() => {
+    const fetchAudioSummary = (audioSources: AudioSources) => {
+        const { file, url } = audioSources;
+
         setIsProcessing(true);
         fetch("http://192.168.1.107:6030/summarize_audio", {
             headers: {
-                "Content-Type": !!audioFile ? "audio/*" : "application/json",
+                "Content-Type": !!file ? "audio/*" : "application/json",
             },
             method: "POST",
-            body: !!audioFile ? audioFile : JSON.stringify({ url: audioUrl }),
+            body: !!file ? file : JSON.stringify({ url }),
         })
             .then((res) => {
                 return res.json();
@@ -28,7 +35,10 @@ export default function ExerciseBoard({
                 setIsProcessing(error ? true : false);
             })
             .catch((error) => console.log({ error }));
-    }, [audioFile, audioUrl]);
+    };
+
+    useEffect(() => fetchAudioSummary({ file: audioFile }), [audioFile]);
+    useEffect(() => fetchAudioSummary({ url: audioUrl }), [audioUrl]);
 
     if (!(audioFile || audioUrl)) return <></>;
 
