@@ -78,7 +78,6 @@ export default function ExerciseCards({
         audioFragment: FragmentAudioData,
         index: number
     ) => {
-        console.log(event.key);
         if (event.key !== "Enter") return;
 
         const userAnswerSanitized = sanitizeText(event.target.value);
@@ -90,7 +89,6 @@ export default function ExerciseCards({
         const hintList = ["✭"];
         let isFirstErrorSetted = false;
         for (let i = 0; i < correctAnswerdWords.length; i++) {
-            console.log(userAnswerdWords[i], correctAnswerdWords[i]);
             if (
                 userAnswerdWords[i] !== correctAnswerdWords[i] &&
                 isFirstErrorSetted

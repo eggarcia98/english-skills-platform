@@ -34,7 +34,7 @@ export default function ReactPlayerComponent({
     const restartAudioToAudioFragmentStartTimeSetted = () => {
         if (playerRef.current && !hasPlayed) {
             playerRef.current.seekTo(
-                fragmetAudioTime.audio_start_time,
+                fragmetAudioTime?.audio_start_time ?? 0,
                 "seconds"
             );
             setIsPlaying(true);

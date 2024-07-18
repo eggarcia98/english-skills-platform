@@ -19,6 +19,8 @@ export default function ExerciseBoard({
     const fetchAudioSummary = (audioSources: AudioSources) => {
         const { file, url } = audioSources;
 
+        if (!file && !url) return;
+
         setIsProcessing(true);
         fetch("http://192.168.1.107:6030/summarize_audio", {
             headers: {
@@ -34,7 +36,7 @@ export default function ExerciseBoard({
                 setAudioSummary(error ? [] : data);
                 setIsProcessing(error ? true : false);
             })
-            .catch((error) => console.log({ error }));
+            .catch((error) => error);
     };
 
     useEffect(() => fetchAudioSummary({ file: audioFile }), [audioFile]);

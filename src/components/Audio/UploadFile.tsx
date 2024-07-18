@@ -10,7 +10,6 @@ export default function UploadFile({ setAudioFile }: UploadFileProps) {
         const files = fileInput.files;
 
         const audioFile = [...files][0];
-        console.log("UPLOAD");
         if (audioFile) {
             setAudioFile(audioFile);
         }
@@ -38,7 +37,7 @@ export default function UploadFile({ setAudioFile }: UploadFileProps) {
     return (
         <form
             action="#"
-            className="h-24 w-60 min-w-[auto] bg-white bg-gray-100 rounded-lg shadow-inner m-6"
+            className="h-24 w-60 min-w-[auto] bg-white rounded-lg shadow-inner m-6"
             onDragOver={handleDrag}
             onDragEnter={handleDrag}
             onDrop={handleDrop}
