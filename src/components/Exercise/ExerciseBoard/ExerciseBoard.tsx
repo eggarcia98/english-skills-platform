@@ -22,7 +22,10 @@ export default function ExerciseBoard({
         if (!file && !url) return;
 
         setIsProcessing(true);
-        fetch("http://192.168.1.107:6030/summarize_audio", {
+
+        const host = process.env.NEXT_PUBLIC_API_SERVER_HOST;
+        const port = process.env.NEXT_PUBLIC_API_SERVER_PORT;
+        fetch(`${host}:${port}/summarize_audio`, {
             headers: {
                 "Content-Type": !!file ? "audio/*" : "application/json",
             },
