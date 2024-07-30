@@ -26,7 +26,7 @@ export default function Home() {
                 <UploadFile setAudioFile={setAudioFile} />
                 <AudioUrlInput setAudioUrl={setAudioUrl} />
             </div>
-            <main className="flex-1 grid n-xs:grid-cols-2 col-span-1 justify-items-center gap-6 m-5 ">
+            <main className="flex-1 grid n-xs:grid-cols-2 col-span-1 justify-items-center gap-6 m-5">
                 <div className="w-full col-span-2 n-xs:col-span-1">
                     <ReactPlayerComponent
                         audioFile={audioFile}

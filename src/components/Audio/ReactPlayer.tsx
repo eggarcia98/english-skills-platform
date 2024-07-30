@@ -44,7 +44,7 @@ export default function ReactPlayerComponent({
     if (!(audioFile || audioUrl)) return <></>;
 
     return (
-        <div className="max-h-[600px] h-full w-full flex flex-col">
+        <div className="n-xs:max-h-[400px] n-xs:h-full h-full w-full grid items-start">
             <ReactPlayer
                 ref={playerRef}
                 url={currentUrlAudio}
