@@ -2,6 +2,7 @@
 import ExerciseBoard from "@/components/Exercise/ExerciseBoard";
 import ReactPlayerComponent from "@/components/Audio/ReactPlayer";
 import UploadFile from "@/components/Audio/UploadFile";
+import Image from "next/image";
 
 import React, { Dispatch, SetStateAction, useState } from "react";
 import AudioUrlInput from "@/components/Audio/AudioUrlInput";
@@ -29,11 +30,20 @@ export default function Home() {
     return (
         <div className="min-h-screen flex flex-col text-gray-800">
             {/* Navigation */}
-            <nav className="border-b border-gray-200 bg-white py-4 n-xs:px-44 px-4">
+            <nav className="border-b border-gray-200 bg-white py-1 n-xs:px-40 px-4">
                 <div className="container mx-auto flex justify-between items-center">
-                    <h1 className="text-xl font-semibold tracking-wide">
-                        {titlePage}
-                    </h1>
+                    <div className="container flex items-center">
+                        <Image
+                            src="/logo.png" // The path should be relative to the 'public' folder
+                            alt="A descriptive alt text"
+                            className="mr-3"
+                            width={50} // Define width
+                            height={50} // Define height
+                        />
+                        <h1 className="text-xl font-semibold tracking-wide">
+                            {titlePage}
+                        </h1>
+                    </div>
 
                     {/* Hamburger Icon for Mobile */}
                     <div className="lg:hidden">
@@ -112,7 +122,7 @@ export default function Home() {
             </nav>
 
             {/* Hero Section */}
-            <main className="flex-grow bg-gray-50 n-xs:px-48 sm:px-4 px-4 flex items-center justify-center">
+            <main className="flex-grow bg-gray-50 px-4 sm:px-20 flex items-center justify-center">
                 <div className="container mx-auto text-center">
                     {activeSection === "home" && (
                         <div>
