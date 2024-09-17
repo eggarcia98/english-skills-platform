@@ -28,6 +28,7 @@ export default function Home() {
     const menuItems = () => <div></div>;
 
     return (
+
         <div className="min-h-screen flex flex-col text-gray-800">
             {/* Navigation */}
             <nav className="border-b border-gray-200 bg-white py-1 n-xs:px-40 px-4">
@@ -173,6 +174,7 @@ export default function Home() {
                             </div>
                         </div>
                     )}
+
                 </div>
             </main>
 

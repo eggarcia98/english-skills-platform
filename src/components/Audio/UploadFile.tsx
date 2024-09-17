@@ -37,7 +37,7 @@ export default function UploadFile({ setAudioFile }: UploadFileProps) {
     return (
         <form
             action="#"
-            className="h-24 w-60 min-w-[auto] bg-white rounded-lg shadow-inner m-6"
+            className="h-24 w-60 min-w-[auto] bg-white rounded-lg shadow-inner m-1"
             onDragOver={handleDrag}
             onDragEnter={handleDrag}
             onDrop={handleDrop}
