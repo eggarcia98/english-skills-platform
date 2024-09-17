@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { ExerciseCardsProps, FragmentAudioData } from "@/types";
 
 export default function ExerciseCards({
@@ -78,6 +78,7 @@ export default function ExerciseCards({
         audioFragment: FragmentAudioData,
         index: number
     ) => {
+        console.log(event);
         if (event.key !== "Enter") return;
 
         const userAnswerSanitized = sanitizeText(event.target.value);

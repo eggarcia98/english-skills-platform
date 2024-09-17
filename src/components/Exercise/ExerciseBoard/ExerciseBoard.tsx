@@ -21,22 +21,23 @@ export default function ExerciseBoard({
 
         if (!file && !url) return;
 
-        setIsProcessing(true);
-
         const host = process.env.NEXT_PUBLIC_API_SERVER_HOST;
         const port = process.env.NEXT_PUBLIC_API_SERVER_PORT;
+
+        const formData = new FormData();
+        if (file) formData.append("audio", file, file.name);
+
+        setIsProcessing(true);
+
         fetch(`${host}:${port}/summarize_audio`, {
-            headers: {
-                "Content-Type": !!file ? "audio/*" : "application/json",
-            },
             method: "POST",
-            body: !!file ? file : JSON.stringify({ url }),
+            body: !!file ? formData : JSON.stringify({ url }),
         })
             .then((res) => {
                 return res.json();
             })
-            .then(({ data, error }) => {
-                setAudioSummary(error ? [] : data);
+            .then(({ transcript, error }) => {
+                setAudioSummary(error ? [] : transcript);
                 setIsProcessing(error ? true : false);
             })
             .catch((error) => error);
