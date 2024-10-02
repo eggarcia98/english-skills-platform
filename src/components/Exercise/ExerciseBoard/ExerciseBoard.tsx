@@ -29,7 +29,7 @@ export default function ExerciseBoard({
 
         setIsProcessing(true);
 
-        fetch(`${host}:${port}/summarize_audio`, {
+        fetch(`${host}/summarize_audio`, {
             method: "POST",
             body: !!file ? formData : JSON.stringify({ url }),
         })
