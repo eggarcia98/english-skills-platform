@@ -28,6 +28,7 @@ export default function ExerciseBoard({
         if (file) formData.append("audio", file, file.name);
 
         setIsProcessing(true);
+
         fetch(`${host}/summarize_audio`, {
             method: "POST",
             body: !!file ? formData : JSON.stringify({ url }),
