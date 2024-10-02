@@ -21,7 +21,8 @@ export default function ExerciseBoard({
 
         if (!file && !url) return;
 
-        const host = process.env.NEXT_PUBLIC_API_SERVER_HOST;
+        const host =
+            "https://audio-summarizer-248854586820.us-central1.run.app";
         const port = process.env.NEXT_PUBLIC_API_SERVER_PORT;
 
         const formData = new FormData();
