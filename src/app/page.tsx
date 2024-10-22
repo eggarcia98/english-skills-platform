@@ -27,6 +27,7 @@ export default function Home() {
     // };
 
     return (
+
         <div className="min-h-screen flex flex-col text-gray-800">
             {/* Navigation */}
             <NavBar titlePage={titlePage} setActiveSection={setActiveSection} />
@@ -83,6 +84,7 @@ export default function Home() {
                             </div>
                         </div>
                     )}
+
                 </div>
             </main>
 
