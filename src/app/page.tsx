@@ -27,7 +27,6 @@ export default function Home() {
     // };
 
     return (
-
         <div className="min-h-screen flex flex-col text-gray-800">
             {/* Navigation */}
             <NavBar titlePage={titlePage} setActiveSection={setActiveSection} />
@@ -51,7 +50,7 @@ export default function Home() {
                                 upload an audio file directly from your device
                             </p>
                             <button
-                                onClick={() => handleMenuClick("exercises")}
+                                onClick={() => setActiveSection("exercises")}
                                 className="px-8 py-3 bg-blue-600 text-white text-sm rounded-md shadow-sm hover:bg-blue-700 transition-all duration-300"
                             >
                                 Get Started
@@ -84,7 +83,6 @@ export default function Home() {
                             </div>
                         </div>
                     )}
-
                 </div>
             </main>
 
