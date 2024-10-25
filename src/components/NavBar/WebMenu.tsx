@@ -1,6 +1,6 @@
 export default function WebMenu({ setActiveSection }: any) {
     return (
-        <ul className="lg:flex space-x-6 text-sm hidden">
+        <ul className="lg:flex space-x-6  hidden">
             <li>
                 <button
                     onClick={() => setActiveSection("home")}

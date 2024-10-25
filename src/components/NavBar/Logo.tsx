@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Logo({ titlePage }: { titlePage: string }) {
     return (
-        <div className="container flex items-center">
+        <div className="flex items-center">
             <Image
                 src="/logo.png" // The path should be relative to the 'public' folder
                 alt="A descriptive alt text"
