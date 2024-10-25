@@ -10,7 +10,7 @@ export default function Home() {
     const titlePage = "Audio Learner";
 
     return (
-        <div className="min-h-screen flex flex-col text-gray-800">
+        <div className="grid grid-flow-row grid-rows-[auto_1fr_auto] min-h-dvh text-gray-800 ">
             {/* Navigation */}
             <NavBar titlePage={titlePage} setActiveSection={setActiveSection} />
 
@@ -21,7 +21,7 @@ export default function Home() {
                         <HomeContent setActiveSection={setActiveSection} />
                     )}
 
-                    {activeSection === "exercises" && <Exercise/>}
+                    {activeSection === "exercises" && <Exercise />}
                 </div>
             </main>
 
