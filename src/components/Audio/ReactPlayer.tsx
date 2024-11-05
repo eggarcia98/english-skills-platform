@@ -24,14 +24,14 @@ export default function ReactPlayerComponent({
     }, [audioUrl]);
 
     useEffect(() => {
-        restartAudioToAudioFragmentStartTimeSetted("");
+        restartAudioToAudioFragmentStartTimeSetted();
     }, [hasPlayed, fragmetAudioTime]);
 
     useEffect(() => {
         setHasPlayed(false);
     }, [fragmetAudioTime]);
 
-    const restartAudioToAudioFragmentStartTimeSetted = (a: any) => {
+    const restartAudioToAudioFragmentStartTimeSetted = () => {
         if (playerRef.current && !hasPlayed) {
             playerRef.current.seekTo(
                 fragmetAudioTime?.audio_start_time ?? 0,

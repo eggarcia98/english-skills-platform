@@ -24,7 +24,7 @@ export default function LoadedExercise() {
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 my-8 max-h-[calc(3*5rem)] overflow-y-scroll">
                 {loadedExercises.map(
                     ({ name, duration }: any, index: number) => (
-                        <button className="grid grid-cols-[auto_1fr] border rounded-lg w-3/4 sm:w-full items-center justify-self-center">
+                        <button key={index} className="grid grid-cols-[auto_1fr] border rounded-lg w-3/4 sm:w-full items-center justify-self-center">
                             <div className="px-4 border-r flex flex-col ">
                                 PLAY
                             </div>
