@@ -1,3 +1,5 @@
+import LoadedExercise from "../LoadedExercise";
+
 export default function HomeContent({ setActiveSection }: any) {
     return (
         <div>
@@ -21,6 +23,8 @@ export default function HomeContent({ setActiveSection }: any) {
             >
                 Get Started
             </button>
+
+            <LoadedExercise></LoadedExercise>
         </div>
     );
 }
