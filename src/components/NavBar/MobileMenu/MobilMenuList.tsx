@@ -2,7 +2,7 @@ export default function MobileMenuList({ isMenuOpen, setActiveSection }: any) {
     return (
         isMenuOpen && (
             <div className="lg:hidden">
-                <ul className="space-y-4 text-center mt-4">
+                <ul className="space-y-4 mt-4 text-center">
                     <li>
                         <a
                             href="/"
@@ -14,7 +14,7 @@ export default function MobileMenuList({ isMenuOpen, setActiveSection }: any) {
                     </li>
                     <li>
                         <a
-                            href="/exercises"
+                            href="#"
                             onClick={() => setActiveSection("exercises")}
                             className="block text-gray-700 hover:text-blue-600"
                         >

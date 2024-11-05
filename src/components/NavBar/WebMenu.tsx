@@ -4,7 +4,7 @@ export default function WebMenu({ setActiveSection }: any) {
             <li>
                 <button
                     onClick={() => setActiveSection("home")}
-                    className="hover:text-blue-600 transition-colors duration-300"
+                    className="hover:text-blue-600 transition-colors duration-700"
                 >
                     Home
                 </button>
@@ -12,7 +12,7 @@ export default function WebMenu({ setActiveSection }: any) {
             <li>
                 <button
                     onClick={() => setActiveSection("exercises")}
-                    className="hover:text-blue-600 transition-colors duration-300"
+                    className="hover:text-blue-600 transition-colors duration-700"
                 >
                     Exercises
                 </button>

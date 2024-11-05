@@ -15,18 +15,17 @@ export default function Home() {
             <NavBar titlePage={titlePage} setActiveSection={setActiveSection} />
 
             {/* Main Content*/}
-            <main className="flex-grow bg-gray-50 px-4 sm:px-20 flex items-center justify-center">
+            <main className="flex flex-grow bg-gray-50 px-4 sm:px-20 items-center">
                 <div className="container mx-auto text-center w-auto">
                     {activeSection === "home" && (
                         <HomeContent setActiveSection={setActiveSection} />
                     )}
-
                     {activeSection === "exercises" && <Exercise />}
                 </div>
             </main>
 
             {/* Footer */}
-            <footer className="bg-white border-t border-gray-200 py-4">
+            <footer className="border-t border-gray-200 bg-white py-4">
                 <div className="container mx-auto text-center text-sm text-gray-500">
                     <p>
                         &copy; {new Date().getFullYear()} {titlePage}. All
