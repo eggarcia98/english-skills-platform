@@ -1,7 +1,7 @@
 import LoadedExercise from "../LoadedExercise";
 import Link from "next/link";
 
-export default function HomeContent({ setActiveSection, setAudioUrl }: any) {
+export default function HomeContent({ setAudioUrl }: any) {
     return (
         <div>
             <h2 className="text-3xl font-bold leading-tight text-gray-900  mb-8">
@@ -19,16 +19,13 @@ export default function HomeContent({ setActiveSection, setAudioUrl }: any) {
                 </div>
             </div>
             <Link
-                onClick={() => setActiveSection("exercises")}
                 href={"/exercises"}
                 className="px-8 py-3 bg-blue-600 text-white text-sm rounded-md shadow-sm hover:bg-blue-700 transition-all duration-300"
             >
                 Get Started
             </Link>
 
-            <LoadedExercise
-                setActiveSection={setActiveSection}
-            ></LoadedExercise>
+            <LoadedExercise></LoadedExercise>
         </div>
     );
 }

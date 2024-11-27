@@ -1,10 +1,7 @@
 import { useEffect, useState } from "react";
 
-interface AudioUrlInputProps {
-    setAudioUrl: React.Dispatch<React.SetStateAction<null>>;
-}
 
-export default function LoadedExercise({ setActiveSection }: any) {
+export default function LoadedExercise() {
     const [loadedExercises, setLoadedExercises] = useState([]);
 
     const filterExercisesWithUrlSource = (allExercises: any) => {
@@ -61,9 +58,8 @@ export default function LoadedExercise({ setActiveSection }: any) {
                     ) => (
                         <a
                             key={index}
-                            href="#"
+                            href="/exercises"
                             onClick={() => {
-                                setActiveSection("exercises")
                                 localStorage.setItem(
                                     "sourceUrl",
                                     source_url

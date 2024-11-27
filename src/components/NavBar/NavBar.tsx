@@ -4,7 +4,7 @@ import MobileMenu from "./MobileMenu/MobileMenu";
 import WebMenu from "./WebMenu";
 import MobileMenuList from "./MobileMenu/MobilMenuList";
 
-export default function NavBar({ setActiveSection, titlePage }: any) {
+export default function NavBar({ titlePage }: any) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
@@ -17,12 +17,12 @@ export default function NavBar({ setActiveSection, titlePage }: any) {
                     setIsMenuOpen={setIsMenuOpen}
                 />
                 {/* Desktop Menu Items */}
-                <WebMenu setActiveSection={setActiveSection} />
+                <WebMenu/>
             </div>
 
             {/* Mobile Menu List */}
             <MobileMenuList
-                setActiveSection={setActiveSection}
+                
                 isMenuOpen={isMenuOpen}
             />
         </nav>
