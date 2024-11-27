@@ -1,4 +1,5 @@
 import LoadedExercise from "../LoadedExercise";
+import Link from "next/link";
 
 export default function HomeContent({ setActiveSection, setAudioUrl }: any) {
     return (
@@ -17,12 +18,13 @@ export default function HomeContent({ setActiveSection, setAudioUrl }: any) {
                     directly from your device
                 </div>
             </div>
-            <button
+            <Link
                 onClick={() => setActiveSection("exercises")}
+                href={"/exercises"}
                 className="px-8 py-3 bg-blue-600 text-white text-sm rounded-md shadow-sm hover:bg-blue-700 transition-all duration-300"
             >
                 Get Started
-            </button>
+            </Link>
 
             <LoadedExercise
                 setActiveSection={setActiveSection}
