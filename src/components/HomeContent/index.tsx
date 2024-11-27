@@ -1,6 +1,6 @@
 import LoadedExercise from "../LoadedExercise";
 
-export default function HomeContent({ setActiveSection }: any) {
+export default function HomeContent({ setActiveSection, setAudioUrl }: any) {
     return (
         <div>
             <h2 className="text-3xl font-bold leading-tight text-gray-900  mb-8">
@@ -24,7 +24,9 @@ export default function HomeContent({ setActiveSection }: any) {
                 Get Started
             </button>
 
-            <LoadedExercise></LoadedExercise>
+            <LoadedExercise
+                setActiveSection={setActiveSection}
+            ></LoadedExercise>
         </div>
     );
 }
