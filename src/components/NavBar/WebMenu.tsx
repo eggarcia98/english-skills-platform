@@ -1,21 +1,24 @@
-export default function WebMenu({ setActiveSection }: any) {
+import Link from "next/link";
+
+
+export default function WebMenu() {
     return (
-        <ul className="lg:flex space-x-6 text-sm hidden">
+        <ul className="lg:flex space-x-6  hidden">
             <li>
-                <button
-                    onClick={() => setActiveSection("home")}
-                    className="hover:text-blue-600 transition-colors duration-300"
+                <Link
+                    href={"/home"}
+                    className="hover:text-blue-600 transition-colors duration-700"
                 >
                     Home
-                </button>
+                </Link>
             </li>
             <li>
-                <button
-                    onClick={() => setActiveSection("exercises")}
-                    className="hover:text-blue-600 transition-colors duration-300"
+                <Link
+                    href={"/exercises"}
+                    className="hover:text-blue-600 transition-colors duration-700"
                 >
                     Exercises
-                </button>
+                </Link>
             </li>
         </ul>
     );

@@ -19,11 +19,17 @@ export default function ExerciseBoard({
     const fetchAudioSummary = (audioSources: AudioSources) => {
         const { file, url } = audioSources;
 
-        if (!file && !url) return;
+       
+        if (!file && !url && !localStorage.getItem("sourceUrl") ) return;
 
-        const host =
-            "https://audio-summarizer-248854586820.us-central1.run.app";
-        const port = process.env.NEXT_PUBLIC_API_SERVER_PORT;
+         console.log(
+             JSON.stringify({
+                 url: url ? url : localStorage.getItem("sourceUrl"),
+             })
+         );
+
+        const host = process.env.NEXT_PUBLIC_API_SERVER_HOST;
+        // const port = process.env.NEXT_PUBLIC_API_SERVER_PORT;
 
         const formData = new FormData();
         if (file) formData.append("audio", file, file.name);
@@ -32,7 +38,7 @@ export default function ExerciseBoard({
 
         fetch(`${host}/summarize_audio`, {
             method: "POST",
-            body: !!file ? formData : JSON.stringify({ url }),
+            body: !!file ? formData : JSON.stringify({ url: url ? url : localStorage.getItem("sourceUrl")}),
         })
             .then((res) => {
                 return res.json();
