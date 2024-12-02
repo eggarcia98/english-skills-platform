@@ -59,7 +59,7 @@ export default function LoadedExercise() {
             >
                 {loadedExercises.map(
                     (
-                        { filename, duration, source_url }: any,
+                        { filename, duration, source_url }: FragmentAudioData,
                         index: number
                     ) => (
                         <a
@@ -68,7 +68,7 @@ export default function LoadedExercise() {
                             onClick={() => {
                                 localStorage.setItem(
                                     "sourceUrl",
-                                    source_url
+                                    source_url ?? ""
                                 );
 
                             }}
@@ -79,7 +79,7 @@ export default function LoadedExercise() {
                             </div>
                             <div className="p-2 px-4 flex flex-col items-start  overflow-hidden">
                                 <div className="truncate font-semibold ">
-                                    {formatFilename(filename)}
+                                    {formatFilename(filename ?? "")}
                                 </div>
                                 <div className="text-gray-500"> {duration}</div>
                             </div>

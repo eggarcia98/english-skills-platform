@@ -13,4 +13,5 @@ export interface FragmentAudioData {
     filename?: string;
     isApproved?: boolean;
     hints?: string;
+    duration?: string;
 }

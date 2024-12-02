@@ -4,7 +4,7 @@ import MobileMenu from "./MobileMenu/MobileMenu";
 import WebMenu from "./WebMenu";
 import MobileMenuList from "./MobileMenu/MobilMenuList";
 
-export default function NavBar({ titlePage }: any) {
+export default function NavBar({ titlePage }: {titlePage: string}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
