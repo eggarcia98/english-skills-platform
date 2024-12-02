@@ -9,6 +9,8 @@ export interface FragmentAudioData {
     audio_start_time: number;
     chunk_start_time: number;
     transcript: string;
+    source_url?: string;
+    filename?: string;
     isApproved?: boolean;
     hints?: string;
 }

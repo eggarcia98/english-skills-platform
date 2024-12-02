@@ -1,12 +1,14 @@
+import { FragmentAudioData } from "@/types";
 import { useEffect, useState } from "react";
 
 
 export default function LoadedExercise() {
-    const [loadedExercises, setLoadedExercises] = useState([]);
+    const [loadedExercises, setLoadedExercises] = useState<FragmentAudioData[]>([]);
 
-    const filterExercisesWithUrlSource = (allExercises: any) => {
+    const filterExercisesWithUrlSource = (allExercises: FragmentAudioData[]) => {
         return allExercises.filter(
-            (exerciseMetadata: any) => !!exerciseMetadata.source_url
+            (exerciseMetadata: FragmentAudioData) =>
+                !!exerciseMetadata.source_url
         );
     };
 
@@ -38,6 +40,10 @@ export default function LoadedExercise() {
                 return res.json();
             })
             .then(({ data, error }) => {
+                if (error) {
+                    throw new Error(error);
+                }
+                
                 setLoadedExercises(filterExercisesWithUrlSource(data ?? []));
             })
             .catch((error) => error);

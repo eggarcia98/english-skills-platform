@@ -1,7 +1,7 @@
 import LoadedExercise from "../LoadedExercise";
 import Link from "next/link";
 
-export default function HomeContent({ setAudioUrl }: any) {
+export default function HomeContent() {
     return (
         <div>
             <h2 className="text-3xl font-bold leading-tight text-gray-900  mb-8">
@@ -25,7 +25,7 @@ export default function HomeContent({ setAudioUrl }: any) {
                 Get Started
             </Link>
 
-            <LoadedExercise></LoadedExercise>
+            <LoadedExercise />
         </div>
     );
 }
