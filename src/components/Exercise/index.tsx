@@ -1,3 +1,5 @@
+"use client";
+
 import ExerciseBoard from "@/components/Exercise/ExerciseBoard";
 import ReactPlayerComponent from "@/components/Audio/ReactPlayer";
 import UploadFile from "@/components/Audio/UploadFile";
