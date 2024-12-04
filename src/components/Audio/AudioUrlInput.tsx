@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 interface AudioUrlInputProps {
-    setAudioUrl: React.Dispatch<React.SetStateAction<null>>;
+    setAudioUrl: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 export default function AudioUrlInput({ setAudioUrl }: AudioUrlInputProps) {

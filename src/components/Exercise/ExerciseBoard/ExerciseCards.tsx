@@ -78,7 +78,6 @@ export default function ExerciseCards({
         audioFragment: FragmentAudioData,
         index: number
     ) => {
-        console.log(event);
         if (event.key !== "Enter") return;
 
         const userAnswerSanitized = sanitizeText(event.target.value);
