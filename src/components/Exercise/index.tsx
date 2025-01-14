@@ -23,7 +23,7 @@ export default function Exercise() {
             setAudioUrl(savedAudioUrl);
             localStorage.removeItem("sourceUrl");
         }
-    },[]);
+    }, []);
 
     return (
         <div className="grid grid-cols-2 grid-rows-[auto_auto_auto_auto] justify-items-center gap-6 space-evenly m-5">

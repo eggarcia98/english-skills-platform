@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import ExerciseCards from "./ExerciseCards";
 
 import { ExerciseBoardProps } from "@/types";
+import FlashDialog from "@/components/FlashDialog";
 
 interface AudioSources {
     file?: File | null;
@@ -15,6 +16,7 @@ export default function ExerciseBoard({
 }: ExerciseBoardProps) {
     const [isProcessing, setIsProcessing] = useState(true);
     const [isServerApiDown, setIsServerApiDown] = useState(false);
+    const [visible, setVisible] = useState(false);
 
     const [audioSummary, setAudioSummary] = useState([]);
 
@@ -83,29 +85,16 @@ export default function ExerciseBoard({
     };
 
     const getServerApiDownContent = () => {
-        console.log("Server API is down: ", isServerApiDown);
-        setIsServerApiDown(false);
-        return (
-            <div
-                className={`fixed bg-blue-100 bg-opacity-45 border-blue-500 text-blue-700 px-4 py-3 rounded-md  transition-all duration-500 top-20 sm:right-4 popUp 0.5s ease-out
-                  
-                    `}
-            >
-                <p className="font-bold">Informational message</p>
-                <p className="text-sm">
-                    Some additional text to explain said message.
-                </p>
-            </div>
-        );
+        return <FlashDialog  />;
     };
 
     const getContentPage = () => {
-        if (isProcessing) return getBrocessingBoilerplate();
+        console.log("GETTING CONTENT: ");
 
         if (isServerApiDown) return getServerApiDownContent();
 
         return getExerciseCardsContent();
     };
 
-    return <>{getContentPage()}</>;
+    return <>{isProcessing ? getBrocessingBoilerplate() : getContentPage()}</>;
 }
