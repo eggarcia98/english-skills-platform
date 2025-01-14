@@ -33,7 +33,7 @@ export default function LoadedExerciseItem({
             onClick={() => {
                 localStorage.setItem("sourceUrl", source_url ?? "");
             }}
-            className="grid grid-cols-[auto_1fr] border rounded-lg w-3/4 sm:w-full items-center justify-self-center"
+            className="grid grid-cols-[auto_1fr] border rounded-lg w-3/4 sm:w-full items-center justify-self-center bg-white"
         >
             <div className="px-4 border-r flex flex-col ">Play ►</div>
             <div className="p-2 px-4 flex flex-col items-start overflow-hidden">

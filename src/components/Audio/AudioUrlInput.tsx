@@ -11,7 +11,7 @@ export default function AudioUrlInput({ setAudioUrl }: AudioUrlInputProps) {
             ⏤ or use Youtube url ⏤
             <div className="flex gap-2 w-full justify-center">
                 <input
-                    className="peer h-full= w-full sm:w-full md:w-96 lg:w-98 rounded-[7px] border border-blue-gray-200 bg-transparent px-3 py-2.5 font-sans text-sm font-normal dark:text-blue-gray-700 text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-teal-500  focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
+                    className="peer h-full= w-full sm:w-full md:w-96 lg:w-98 rounded-[7px] border border-gray-600 bg-transparent px-3 py-2.5 font-sans text-sm font-normal dark:text-blue-gray-700 text-blue-gray-700 outline outline-0 transition-all placeholder-shown:border placeholder-shown:border-blue-gray-200 placeholder-shown:border-t-blue-gray-200 focus:border-2 focus:border-teal-500  focus:outline-0 disabled:border-0 disabled:bg-blue-gray-50"
                     placeholder="... paste url here"
                     onChange={(event: any) =>
                         setInputAudioUrlValue(event.target.value)

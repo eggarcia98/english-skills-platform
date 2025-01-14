@@ -16,7 +16,6 @@ export default function ExerciseBoard({
 }: ExerciseBoardProps) {
     const [isProcessing, setIsProcessing] = useState(true);
     const [isServerApiDown, setIsServerApiDown] = useState(false);
-    const [visible, setVisible] = useState(false);
 
     const [audioSummary, setAudioSummary] = useState([]);
 
@@ -50,7 +49,6 @@ export default function ExerciseBoard({
             .catch((error) => {
                 setIsProcessing(false);
                 setIsServerApiDown(true);
-                console.error("Error fetching audio summary:", error);
             });
     };
 
@@ -89,10 +87,7 @@ export default function ExerciseBoard({
     };
 
     const getContentPage = () => {
-        console.log("GETTING CONTENT: ");
-
         if (isServerApiDown) return getServerApiDownContent();
-
         return getExerciseCardsContent();
     };
 

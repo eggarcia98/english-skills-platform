@@ -10,7 +10,7 @@ export default function NavBar({ titlePage }: {titlePage: string}) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     return (
-        <nav className="border-b border-gray-200 p-2 px-8 lg:px-40">
+        <nav className="border-b border-gray-200 p-2 px-8 lg:px-40 bg-white bg-opacity-90">
             <div className="flex justify-between items-center">
                 <Logo titlePage={titlePage} />
                 {/* Hamburger Icon for Mobile */}
@@ -19,14 +19,11 @@ export default function NavBar({ titlePage }: {titlePage: string}) {
                     setIsMenuOpen={setIsMenuOpen}
                 />
                 {/* Desktop Menu Items */}
-                <WebMenu/>
+                <WebMenu />
             </div>
 
             {/* Mobile Menu List */}
-            <MobileMenuList
-                
-                isMenuOpen={isMenuOpen}
-            />
+            <MobileMenuList isMenuOpen={isMenuOpen} />
         </nav>
     );
 }

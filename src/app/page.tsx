@@ -9,7 +9,9 @@ async function fetchLoadedExercises(): Promise<FragmentAudioData[]> {
         const res = await fetch(`${host}/saved_audio_transcripts`);
         if (!res.ok) return []; // Return empty array if the response is not ok
 
-        const data: FragmentAudioData[] = await res.json(); // Ensure correct typing of the response
+        const response = await res.json(); // Ensure correct typing of the response
+        
+        const data: FragmentAudioData[] = response.data;
         return data;
     } catch (err) {
         // console.error("Error fetching audio transcripts:", err);
@@ -21,7 +23,7 @@ export default async function Home() {
     const loadedExercises = await fetchLoadedExercises();
 
     return (
-        <main className="flex flex-grow bg-gray-50 px-4 sm:px-20 items-center">
+        <main className="flex flex-grow px-4 sm:px-20 items-center ">
             <div className="container mx-auto text-center w-auto">
                 <HomeContent loadedExercises={loadedExercises} />;
             </div>

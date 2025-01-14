@@ -8,7 +8,7 @@ interface HomeContentProps {
 
 export default function HomeContent({ loadedExercises }: HomeContentProps) {
     return (
-        <div>
+        <div className="bg-opacity-0">
             <h2 className="text-3xl font-bold leading-tight text-gray-900  mb-8">
                 Simple, Customizable, and Easy to use
             </h2>
