@@ -5,7 +5,7 @@ export default function MobileMenuList({ isMenuOpen }: any) {
                 <ul className="space-y-4 mt-4 text-center">
                     <li>
                         <a
-                            href="/home"
+                            href="/"
                             className="block text-gray-700 hover:text-blue-600"
                         >
                             Home

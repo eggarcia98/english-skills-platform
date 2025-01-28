@@ -6,7 +6,7 @@ export default function WebMenu() {
         <ul className="lg:flex space-x-6  hidden">
             <li>
                 <Link
-                    href={"/home"}
+                    href={"/"}
                     className="hover:text-blue-600 transition-colors duration-700"
                 >
                     Home

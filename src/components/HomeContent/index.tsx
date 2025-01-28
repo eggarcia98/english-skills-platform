@@ -1,9 +1,14 @@
+import { FragmentAudioData } from "@/types";
 import LoadedExercise from "../LoadedExercise";
 import Link from "next/link";
 
-export default function HomeContent({ setAudioUrl }: any) {
+interface HomeContentProps {
+    loadedExercises: FragmentAudioData[];
+}
+
+export default function HomeContent({ loadedExercises }: HomeContentProps) {
     return (
-        <div>
+        <div className="bg-opacity-0">
             <h2 className="text-3xl font-bold leading-tight text-gray-900  mb-8">
                 Simple, Customizable, and Easy to use
             </h2>
@@ -25,7 +30,7 @@ export default function HomeContent({ setAudioUrl }: any) {
                 Get Started
             </Link>
 
-            <LoadedExercise></LoadedExercise>
+            <LoadedExercise loadedExercises={loadedExercises} />
         </div>
     );
 }
