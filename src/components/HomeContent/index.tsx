@@ -15,7 +15,7 @@ export default function HomeContent({ loadedExercises }: HomeContentProps) {
             <div className="text-lg text-gray-600 mb-6 space-y-4 max-w-2xl mx-auto">
                 <div>
                     This tool helps improve your English listening skills using
-                    your favorite series or even your own audio files.
+                    your favorite series or even your own video files.
                 </div>
                 <div>
                     All you need is a YouTube link to the video or audio you
